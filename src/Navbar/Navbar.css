@@ -1,0 +1,22 @@
+nav.navbar {
+    box-shadow: 0px 3px 7px #ccc;
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+    align-items: center;
+    background: #319795;
+    padding: 10px 9px;
+}
+
+nav.navbar ul {
+    display: flex;
+    text-decoration: none;
+    width: 50%;
+    justify-content: space-evenly;
+    align-items: center;
+    list-style: none;
+}
+nav.navbar ul li a {
+    color: #fff;
+    font-family: sans-serif;
+}
