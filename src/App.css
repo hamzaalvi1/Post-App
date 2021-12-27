@@ -12,4 +12,10 @@ button.delete {
   text-transform: uppercase;
   color: #fff;
 }
-
+button {
+  background: #000;
+}
+.bgClass{
+  background: brown !important;
+ 
+}

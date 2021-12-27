@@ -1,22 +1,17 @@
 import { Container, Stack,Flex,Text,Heading, Grid,Spinner } from '@chakra-ui/react'
-import React,{useEffect,useState} from 'react'
+import React,{useEffect,useState,useContext} from 'react'
+import Dummy from '../AddPost/Dummy'
 import api from "../Api/api"
+import Dummy2 from '../AddPost/Dummy2/Dummy2'
+import {GlobalContext} from "../GlobalState/GlobalState"
+
 
 const Posts = () => {
-    
+const glblContext = useContext(GlobalContext) 
+   
 
     const [postData,setpostData] = useState([])
-    // const fetchPost = async ()=>{
-    //     try{
-    //         const {data} = await axios.get("https://gorest.co.in/public/v1/posts")
-       
-    //         return data;
-    //     }
-    //     catch(error){
-    //       throw Error("Unable to Fetched Posts") 
-    //     }
-    // }
-    // const {data,isLoading,error} = useQuery('posts',fetchPost)
+   
   
     const fetchNewApi = async ()=>{
               try{
@@ -31,15 +26,12 @@ const Posts = () => {
               }
     }  
   
-//    useEffect(()=>{ 
-//    fetchNewApi()
+   useEffect(()=>{ 
+   fetchNewApi()
  
 
-//    },[])
-   useEffect(()=>{
-    fetchNewApi()  
    },[])
-//    delete post
+ 
 
 const deletePost = async (postID)=>{
      const response = await api.delete(`/posts/${postID}`) 
@@ -56,7 +48,9 @@ const deletePost = async (postID)=>{
 
     return (
         <div className='post'>
+            <Dummy2/>
             <Container maxW={"1250px"} mt="4">
+                <Dummy />
                 
                  {postData.map((pdata,index)=>{
                     return(
@@ -69,7 +63,7 @@ const deletePost = async (postID)=>{
                         <Heading fontSize="2xl">{pdata.title}</Heading>
                              <Text>{pdata.body}</Text>
 
-                             <button className = "delete" onClick = {()=>deletePost(pdata.id)}>Delete</button>
+                             <button className = "delete" onClick={()=> deletePost(pdata.id)}>Delete</button>
                       </Stack>
                     )
                 })}
