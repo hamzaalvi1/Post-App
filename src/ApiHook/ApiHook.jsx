@@ -1,38 +1,26 @@
-import {useState,useEffect,useCallback} from "react"
-import api from "../Api/api"
+import { useState, useEffect } from "react";
+import api from "../Api/api";
 
-export const ApiHook = ()=>{
+export const ApiHook = () => {
+  const [postData, setPostData] = useState([]);
+  const [checkCache, setCheckCache] = useState(false);
+  const fetchNewApi = async () => {
+    try {
+      const response = await api.get("/posts");
+      const data = response.data;
+      setPostData([...data]);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    if (checkCache) {
+      fetchNewApi();
+      setCheckCache(false);
+    } else {
+      fetchNewApi();
+    }
+  }, [checkCache, setCheckCache]);
 
-    const [postData,setPostData] = useState([])
-   
-    const fetchNewApi = async ()=>{
-        try{
-           const response = await api.get("/posts")
-           const data = response.data
-           setPostData([...data])
-            
-            
-        }
-        catch(error){
-            console.log(error)
-        }
-} 
-const MemoizedApi = useCallback(()=>{
-    fetchNewApi()
-},[postData])
-   
-    useEffect(()=>{
-    //    const getData = fetchNewApi()
-    //    getData.then((res,rej)=>{
-    //     if(res.length !== 0){
-    //         setPostData(res)
-    //     }
-
-
-    //    })
-    MemoizedApi()
-        // setPostData(getData)
-    },[])
-     
-  return {postData}
-}
+  return { postData, checkCache, setCheckCache };
+};

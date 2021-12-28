@@ -9,14 +9,14 @@ import { ChakraProvider } from '@chakra-ui/react'
 
 
 ReactDOM.render(
-  <React.StrictMode>
+
     <GlobalProvider>
     <ChakraProvider>
     <App />
     </ChakraProvider>
     </GlobalProvider>
  
-  </React.StrictMode>,
+,
   document.getElementById('root')
 );
 
